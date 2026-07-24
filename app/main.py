@@ -35,19 +35,4 @@ def list_notes():
 def create_note():
     data = request.get_json() or {}
     title = data.get("title")
-    body = data.get("body", "")
-    if not title:
-        return {"error": "title is required"}, 400
-
-    with get_conn() as conn, conn.cursor() as cur:
-        cur.execute(
-            "INSERT INTO notes (title, body) VALUES (%s, %s) RETURNING id;",
-            (title, body),
-        )
-        note_id = cur.fetchone()["id"]
-        conn.commit()
-        return {"id": note_id, "title": title, "body": body}, 201
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    body =
