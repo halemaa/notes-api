@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify
 import os
+
 import psycopg2
+from flask import Flask, jsonify, request
 from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
