@@ -26,8 +26,7 @@ def health():
 @app.route("/notes", methods=["GET"])
 def list_notes():
     with get_conn() as conn, conn.cursor() as cur:
-        cur.execute(
-            "SELECT id, title, body, created_at FROM notes ORDER BY id DESC;")
+        cur.execute("SELECT id, title, body, created_at FROM notes ORDER BY id DESC;")
         return jsonify(cur.fetchall())
 
 
