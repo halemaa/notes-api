@@ -88,13 +88,13 @@ jobs:
           load: true
           tags: notes-api:scan
           labels: ${{ steps.meta.outputs.labels }}
- # TODO: re-enable Trivy after fixing image reference for local scanning
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Scan image with Trivy
-        if: false
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
-
+          image-ref: notes-api:scan
           format: table
           severity: CRITICAL,HIGH
           exit-code: "0"
@@ -116,3 +116,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
